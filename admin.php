@@ -1,15 +1,18 @@
 <?php
 // Initialize the session
   include('scripts/session.php'); 
-
-  include('scripts/fetch_apps.php')
+  if (!isset($_SESSION['admin'])){  
+  	header("Location:welcome.php");
+	die();
+  }
+  include('scripts/fetch_users.php')
 ?>
  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Admin Portal</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; text-align: center; }
@@ -28,7 +31,7 @@
         <h1>Hi, <b><?php echo $_SESSION["login_name"]; ?></b>. Welcome to our site.</h1>
     </div>
     <p>
-        <a href="new_application.php" class="btn btn-warning">Submit Request</a>
+        <a href="new_user.php" class="btn btn-warning">Add a new user</a>
         <a href="scripts/logout.php" class="btn btn-danger">Logout</a>
     </p>
 	<table align="center" border="1px" style="width:60%">
@@ -38,28 +41,21 @@
         	<t>
             		<th style="text-align:center">  ID  </th>
             		<th style="text-align:center">  Name  </th>
-            		<th style="text-align:center">  Email  </th>
-			<th style="text-align:center">  date_submitted  </th>
-			<th style="text-align:center">  date_from  </th>
-			<th style="text-align:center">  date_to  </th>
-			<th style="text-align:center">  days  </th>
-			<th style="text-align:center">  text  </th>
-			<th style="text-align:center">  status  </th>
+            		<th style="text-align:center">  Surname  </th>
+			<th style="text-align:center">  Email  </th>
+			<th style="text-align:center">  Type  </th>
         	</t>
     		<?php
         		while($rows=mysqli_fetch_array($result, MYSQLI_ASSOC))
         		{
+				$query = "email=".$rows['email']."&name=".$rows['name']."&surname=".$rows['surname']."&type=".$rows['type_admin'];
     		?>
             	<tr>
                 	<td>  <?php echo $rows['id']; ?>  </td>
-                	<td>  <?php echo $rows['name']." ".$rows['surname']; ?></td>
-                	<td>  <?php echo $rows['email']; ?></td>
-                	<td>  <?php echo $rows['date_submitted']; ?></td>
-                	<td>  <?php echo $rows['date_from']; ?></td>
-                	<td>  <?php echo $rows['date_to']; ?></td>
-                	<td>  <?php echo $rows['days']; ?></td>
-                	<td>  <?php echo $rows['text']; ?></td>
-			<td>  <?php echo ( intval($rows['status']) == 0  ? "Pending" : ((intval($rows['status']) == 1) ? "Accepted" : "Rejected")); ?></td>
+                	<td>  <?php echo $rows['name']; ?></td>
+                	<td>  <?php echo $rows['surname']; ?></td>
+                	<td> <a href="edit_user.php?<?php echo $query ?>" >  <?php echo $rows['email']; ?> </a> </td>
+			<td>  <?php echo intval($rows['type_admin']) == 0  ? "Employee" :  "Admin"; ?></td>
             	</tr>
     		<?php
         		}

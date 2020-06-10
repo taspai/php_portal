@@ -19,7 +19,7 @@ include("scripts/login_post.php")
         <form action= "" method="post">
             <div class="form-group">
                 <label>Email</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $email; ?>">
+                <input type="text" name="username" class="form-control">
             </div>    
             <div class="form-group">
                 <label>Password</label>
