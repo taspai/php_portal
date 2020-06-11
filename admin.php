@@ -47,8 +47,11 @@
         	</t>
     		<?php
         		while($rows=mysqli_fetch_array($result, MYSQLI_ASSOC))
-        		{
-				$query = "email=".$rows['email']."&name=".$rows['name']."&surname=".$rows['surname']."&type=".$rows['type_admin'];
+			{
+				// For every user in db create a query and make it link on their email, 
+				// will give info for prefilling update info
+				$query ="&e_id=".$rows['id']."&email=".$rows['email']."&name=".$rows['name'].
+					"&surname=".$rows['surname']."&type=".$rows['type_admin'];
     		?>
             	<tr>
                 	<td>  <?php echo $rows['id']; ?>  </td>

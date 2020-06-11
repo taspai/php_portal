@@ -1,5 +1,5 @@
 <?php
-  include("scripts/edit_user.php");
+  include("scripts/post_edit_user.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,7 @@
         <p>Please modify the user's information.</p>
         <form action= "" method="post">
             <div class="form-group">
+		<input type="hidden" name="id" value=<?php echo $_GET['e_id'];?> />
                 <label>Name</label>
 		<input type="text" name="name" class="form-control" value = <?php echo $_GET['name'];?> >
             </div>    
