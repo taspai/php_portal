@@ -1,5 +1,4 @@
 <?php
-// Initialize the session
   include('scripts/session.php'); 
   if (!isset($_SESSION['admin'])){  
   	header("Location:welcome.php");

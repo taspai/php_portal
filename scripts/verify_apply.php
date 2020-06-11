@@ -23,7 +23,6 @@
 	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
 
-
 		if (!$result = mysqli_query($link,$sql)){
 			$error = "Internal Server Error: \n".mysqli_sqlstate($link);
 		} else {

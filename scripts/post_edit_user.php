@@ -12,26 +12,27 @@
    if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($_POST['pass1'] !=  $_POST['pass2']){
 		$error = "Passwords do not match";
-	} else {
+	} elseif ($_POST['email'] == "") {
+		$error = "Email is required";
+	} else {		
 	$id       = intval($_POST['id']);
 	$name 	  = mysqli_real_escape_string ($link, $_POST['name']);
 	$surname  = mysqli_real_escape_string ($link, $_POST['surname']);
 	$email 	  = mysqli_real_escape_string ($link, $_POST['email']);
 	$password = mysqli_real_escape_string ($link, $_POST['pass1']);
 
-	error_log("name : ".$name." surname: ".$surname." email : ".$email." Pass: ".$password." id :".$id." ".intval($id));
 	// Create a format of the UPDATE query
 	$sql = "UPDATE  user SET name = \"%s\" , surname = \"%s\", email = \"%s\", type_admin = %d "; 
 	if ($_POST['pass1']!= ""){ //Password shall not change if left untouched
 		$sql .= ", password = \"".$_POST['pass1']."\" ";
 	}
+
 	$sql .= "where id = ".$id." ;";
 	
 	// Fill the format with the values needed. 	
 	$sql_filled = sprintf($sql, $name, $surname, $email, $_POST['type_admin']);
 	// UPDATE user SET name = name , surname = sname, email = email, type_admin = type where id = num ;
 
-	error_log($sql_filled);
 
 		
 	if (!$result = mysqli_query($link,$sql_filled)){

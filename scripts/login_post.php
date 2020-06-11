@@ -34,7 +34,7 @@
 		header('Location: admin.php');
 	}
          die();
-      }else {
+      } else {
          $error = "Your Login Name or Password is invalid";
       }
    }

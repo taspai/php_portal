@@ -2,7 +2,6 @@
 ini_set("log_errors", TRUE);
 ini_set('error_log', "/home/dimian/php-error.log");
 // I will not have too many prints so I will sloppily put them all in the error log
-error_log("Hello errors");
 
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
